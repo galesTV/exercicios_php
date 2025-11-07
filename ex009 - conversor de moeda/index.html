@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de moeda</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section>
+        <h1>Conversor de Moeda</h1>
+        <form action="conversor.php" method="get">
+            <label for="valor">Valor em Reais (R$):</label>
+            <input type="number" name="valor" id="valor" step="0.01" required>
+            <label for="moeda">Converter para:</label>
+            <select name="moeda" id="moeda">
+                <option value="dolar">Dólar (USD)</option>
+                <option value="euro">Euro (EUR)</option>
+                <option value="libra">Libra Esterlina (GBP)</option>
+                <option value="iene">Iene Japonês (JPY)</option>
+                <option value="peso">Peso Argentino (ARS)</option>
+                <option value="yuan">Yuan Chinês (CNY)</option>
+            </select>
+            <input type="submit" value="Converter">
+        </form>
+    </section>
+</body>
+</html>
