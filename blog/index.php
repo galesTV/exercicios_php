@@ -1,7 +1,13 @@
 <?php 
-echo '<h1>Arquivo index</h1>'; 
-echo "texto dentro de aspas duplas";
+//Arquivo index.php responsável pela inicialização do sistema
 
-print '<p>texto usando print</p>';
-print "<small>texto usando print e aspas duplas</small>";
+// Comentário de uma linha
+# Comentário de uma linha
+/* Comentário de múltiplas linhas 
+linha 1
+linha 2
+linha 3
+*/
+
+echo '<h1>Arquivo index</h1>'; 
 ?>
