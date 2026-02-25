@@ -1,13 +1,8 @@
 <?php 
 //Arquivo index.php responsável pela inicialização do sistema
 
-// Comentário de uma linha
-# Comentário de uma linha
-/* Comentário de múltiplas linhas 
-linha 1
-linha 2
-linha 3
-*/
+require_once 'sistema/configuracao.php'; // Inclui o arquivo de configuração do sistema
+include_once 'helpers.php'; // Inclui o arquivo de funções auxiliares
 
 echo '<h1>Arquivo index</h1>'; 
 ?>
