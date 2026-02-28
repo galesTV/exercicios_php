@@ -1,7 +1,7 @@
 <?php
 
 function saudacao() {
-    $hora = 19; // Simulando a hora atual (19 horas, ou seja, 7 da noite)
+    $hora = date('H'); // Obtém a hora atual no formato de 24 horas
     $saudacao = "";
 
     if($hora >= 0 && $hora < 12) {
