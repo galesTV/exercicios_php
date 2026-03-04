@@ -1,6 +1,28 @@
 <?php
 
 /**
+ * Formata o valor para o formato monetário brasileiro, utilizando vírgula como separador decimal e ponto como separador de milhares. Se o valor for avaliado como falso, retorna 0 formatado.
+ *
+ * @param float $valor Valor a ser formatado.
+ *
+ * @return string Valor formatado no padrão brasileiro (ex: 1.234,56).
+ */
+function formatarValor(float $valor): string {
+    return number_format(($valor ? $valor : 0), 2, ',', '.'); 
+}
+
+/**
+ * Formata o número para o formato brasileiro, utilizando ponto como separador de milhares. Se o número for avaliado como falso, retorna 0 formatado.
+ *
+ * @param string $numero Número a ser formatado.
+ *
+ * @return string Número formatado com separador de milhares (ex: 1.000.000).
+ */
+function formatarNumero(string $numero): string {
+    return number_format(($numero ? $numero : 0), 0, '.', '.'); 
+}
+
+/**
  * Retorna uma saudação com base na hora atual.
  *
  * @return string Mensagem de saudação apropriada ao período do dia.
