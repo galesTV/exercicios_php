@@ -1,6 +1,43 @@
 <?php
 
 /**
+ * Conta o tempo decorrido desde uma determinada data.
+ *
+ * @param string $data Data de referência.
+ *
+ * @return string Tempo decorrido no formato legível.
+ */
+function contarTempo(string $data) : string {
+    $agora = strtotime(date('Y-m-d H:i:s')); // Converte a data para timestamp
+    $tempo = strtotime($data); // Converte a data fornecida para timestamp
+    $diferenca = $agora - $tempo; // Calcula a diferença em segundos
+
+    $segundos = $diferenca;
+    $minutos = round($diferenca / 60);
+    $horas = round($diferenca / 3600);
+    $dias = round($diferenca / 86400);
+    $semanas = round($diferenca / 604800);
+    $meses = round($diferenca / 2629440);
+    $anos = round($diferenca / 31553280);
+
+    if($segundos <= 60){
+        return 'Há poucos segundos';
+    } else if($minutos <= 60){
+        return $minutos == 1 ? 'Há 1 minuto' : 'Há ' . $minutos . ' minutos';
+    } else if($horas <= 24){
+        return $horas == 1 ? 'Há 1 hora' : 'Há ' . $horas . ' horas';
+    } else if($dias <= 7){
+        return $dias == 1 ? 'Há 1 dia' : 'Há ' . $dias . ' dias';
+    } else if($semanas <= 4){
+        return $semanas == 1 ? 'Há 1 semana' : 'Há ' . $semanas . ' semanas';
+    } else if($meses <= 12){
+        return $meses == 1 ? 'Há 1 mês' : 'Há ' . $meses . ' meses';
+    } else {
+        return $anos == 1 ? 'Há 1 ano' : 'Há ' . $anos . ' anos';
+    }
+}
+
+/**
  * Formata o valor para o formato monetário brasileiro, utilizando vírgula como separador decimal e ponto como separador de milhares. Se o valor for avaliado como falso, retorna 0 formatado.
  *
  * @param float $valor Valor a ser formatado.
@@ -14,11 +51,11 @@ function formatarValor(float $valor): string {
 /**
  * Formata o número para o formato brasileiro, utilizando ponto como separador de milhares. Se o número for avaliado como falso, retorna 0 formatado.
  *
- * @param string $numero Número a ser formatado.
+ * @param int $numero Número a ser formatado.
  *
  * @return string Número formatado com separador de milhares (ex: 1.000.000).
  */
-function formatarNumero(string $numero): string {
+function formatarNumero(int $numero): string {
     return number_format(($numero ? $numero : 0), 0, '.', '.'); 
 }
 
