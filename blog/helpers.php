@@ -1,5 +1,15 @@
 <?php
 
+function validarURL(string $url): bool
+{
+    return filter_var($url, FILTER_VALIDATE_URL);
+}
+
+function validarEmail(string $email): bool
+{
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+
 /**
  * Conta o tempo decorrido desde uma determinada data.
  *
@@ -7,7 +17,8 @@
  *
  * @return string Tempo decorrido no formato legível.
  */
-function contarTempo(string $data) : string {
+function contarTempo(string $data): string
+{
     $agora = strtotime(date('Y-m-d H:i:s')); // Converte a data para timestamp
     $tempo = strtotime($data); // Converte a data fornecida para timestamp
     $diferenca = $agora - $tempo; // Calcula a diferença em segundos
@@ -20,17 +31,17 @@ function contarTempo(string $data) : string {
     $meses = round($diferenca / 2629440);
     $anos = round($diferenca / 31553280);
 
-    if($segundos <= 60){
+    if ($segundos <= 60) {
         return 'Há poucos segundos';
-    } else if($minutos <= 60){
+    } else if ($minutos <= 60) {
         return $minutos == 1 ? 'Há 1 minuto' : 'Há ' . $minutos . ' minutos';
-    } else if($horas <= 24){
+    } else if ($horas <= 24) {
         return $horas == 1 ? 'Há 1 hora' : 'Há ' . $horas . ' horas';
-    } else if($dias <= 7){
+    } else if ($dias <= 7) {
         return $dias == 1 ? 'Há 1 dia' : 'Há ' . $dias . ' dias';
-    } else if($semanas <= 4){
+    } else if ($semanas <= 4) {
         return $semanas == 1 ? 'Há 1 semana' : 'Há ' . $semanas . ' semanas';
-    } else if($meses <= 12){
+    } else if ($meses <= 12) {
         return $meses == 1 ? 'Há 1 mês' : 'Há ' . $meses . ' meses';
     } else {
         return $anos == 1 ? 'Há 1 ano' : 'Há ' . $anos . ' anos';
@@ -44,8 +55,9 @@ function contarTempo(string $data) : string {
  *
  * @return string Valor formatado no padrão brasileiro (ex: 1.234,56).
  */
-function formatarValor(float $valor): string {
-    return number_format(($valor ? $valor : 0), 2, ',', '.'); 
+function formatarValor(float $valor): string
+{
+    return number_format(($valor ? $valor : 0), 2, ',', '.');
 }
 
 /**
@@ -55,8 +67,9 @@ function formatarValor(float $valor): string {
  *
  * @return string Número formatado com separador de milhares (ex: 1.000.000).
  */
-function formatarNumero(int $numero): string {
-    return number_format(($numero ? $numero : 0), 0, '.', '.'); 
+function formatarNumero(int $numero): string
+{
+    return number_format(($numero ? $numero : 0), 0, '.', '.');
 }
 
 /**
@@ -64,11 +77,12 @@ function formatarNumero(int $numero): string {
  *
  * @return string Mensagem de saudação apropriada ao período do dia.
  */
-function saudacao() {
+function saudacao()
+{
     $hora = date('H'); // Obtém a hora atual no formato de 24 horas
     $saudacao = "";
 
-    if($hora >= 0 && $hora < 12) {
+    if ($hora >= 0 && $hora < 12) {
         $saudacao = "Bom dia!";
     } else if ($hora >= 12 && $hora < 18) {
         $saudacao = "Boa tarde!";
@@ -88,10 +102,11 @@ function saudacao() {
  *
  * @return string Texto resumido com possível continuação.
  */
-function resumirTexto(string $texto, int $limite, string $continue = '...'): string{
+function resumirTexto(string $texto, int $limite, string $continue = '...'): string
+{
     $textoLimpo = trim($texto); // Remove espaços em branco do início e do fim do texto
 
-    if(mb_strlen($textoLimpo) <= $limite) {
+    if (mb_strlen($textoLimpo) <= $limite) {
         return $texto; // Retorna o texto original se ele for menor ou igual ao limite
     }
 
@@ -99,5 +114,3 @@ function resumirTexto(string $texto, int $limite, string $continue = '...'): str
 
     return $resumirTexto;
 }
-
-?>
