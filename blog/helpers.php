@@ -2,6 +2,20 @@
 
 function validarURL(string $url): bool
 {
+    if(mb_strlen($url) <10){
+        return false; // Verifica se a URL tem pelo menos 10 caracteres
+    }
+    if(!str_contains($url, '.')){
+        return false; // Verifica se a URL contém um ponto
+    }
+    if(str_contains($url, 'http://') || str_contains($url, 'https://')){
+        return true; // Verifica se a URL começa com "http://" ou "https://"
+    }
+    return false; // Retorna false se a URL for inválida
+}
+
+function validarURLComFiltro(string $url): bool
+{
     return filter_var($url, FILTER_VALIDATE_URL);
 }
 
