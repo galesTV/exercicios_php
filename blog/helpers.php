@@ -1,14 +1,36 @@
 <?php
 
+function URL(string $url): string
+{
+    $servidor = filter_input(INPUT_SERVER, 'SERVER_NAME'); // Obtém o nome do servidor a partir da variável de ambiente
+    $ambiente = ($servidor == 'localhost' ? URL_DESENVOLVIMENTO : URL_PRODUCAO); // Determina o ambiente com base no nome do servidor e retorna a URL correspondente
+
+    if(str_starts_with($url, '/')) {
+        return $ambiente . $url; // Retorna a URL completa concatenando o ambiente e a URL fornecida, caso a URL comece com "/"
+    }
+
+    return $ambiente . '/' . $url; // Retorna a URL completa concatenando o ambiente e a URL fornecida, caso a URL não comece com "/"
+}
+
+function localhost(): bool
+{
+    $servidor = filter_input(INPUT_SERVER, 'SERVER_NAME'); // Obtém o nome do servidor a partir da variável de ambiente
+
+    if ($servidor == 'localhost') {
+        return true; // Verifica se o nome do servidor é "localhost"
+    }
+    return false; // Retorna false se o nome do servidor não for "localhost"
+}
+
 function validarURL(string $url): bool
 {
-    if(mb_strlen($url) <10){
+    if (mb_strlen($url) < 10) {
         return false; // Verifica se a URL tem pelo menos 10 caracteres
     }
-    if(!str_contains($url, '.')){
+    if (!str_contains($url, '.')) {
         return false; // Verifica se a URL contém um ponto
     }
-    if(str_contains($url, 'http://') || str_contains($url, 'https://')){
+    if (str_contains($url, 'http://') || str_contains($url, 'https://')) {
         return true; // Verifica se a URL começa com "http://" ou "https://"
     }
     return false; // Retorna false se a URL for inválida

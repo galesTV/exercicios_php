@@ -6,7 +6,7 @@
     define('SITE_DESCRICAO', 'Um blog sobre tecnologia e inovação');
 
     // URLs para produção e desenvolvimento
-    define('URL_PRODUCAO', 'https://gales-tv.vercel.app/');
+    define('URL_PRODUCAO', 'https://gales-tv.vercel.app');
     define('URL_DESENVOLVIMENTO', 'http://localhost/blog');
 
     // const SITE_NOME = 'galesTV'; // Define o nome do site
