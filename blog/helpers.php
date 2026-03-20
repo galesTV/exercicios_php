@@ -1,17 +1,49 @@
 <?php
 
+/** 
+* Função para obter a data atual formatada em português.
+* @param string $data Data a ser formatada.
+* @return string Data formatada no formato "Dia da semana, dia de mês de ano
+*/
+function dataAtual(): string
+{
+    $diaMes = date('d'); // Obtém o dia do mês atual
+    $diaSemana = date('w'); // Obtém o dia da semana atual (0 para domingo, 1 para segunda-feira, etc.)
+    $mes = date('n') - 1; // 'Obtém o número do mês atual (1-12) e subtrai 1 para ajustar ao índice do array de meses
+    $ano = date('Y'); // Obtém o ano atual
+
+    $diasSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado']; // Array associativo que mapeia os números dos dias da semana para seus respectivos nomes em português
+
+    $meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']; // Array associativo que mapeia os números dos meses para seus respectivos nomes em português
+
+    $dataFormatada = $diasSemana[$diaSemana] . ', ' . $diaMes . ' de ' . $meses[$mes] . ' de ' . $ano; // Formata a data no formato "Dia da semana, dia de mês de ano"
+
+    return $dataFormatada; // Retorna a data formatada
+}
+
+/**
+ * Gera uma URL completa baseada no ambiente (desenvolvimento ou produção).
+ *
+ * @param string $url URL relativa ou absoluta a ser processada.
+ * @return string URL completa.
+ */
 function URL(string $url): string
 {
     $servidor = filter_input(INPUT_SERVER, 'SERVER_NAME'); // Obtém o nome do servidor a partir da variável de ambiente
     $ambiente = ($servidor == 'localhost' ? URL_DESENVOLVIMENTO : URL_PRODUCAO); // Determina o ambiente com base no nome do servidor e retorna a URL correspondente
 
-    if(str_starts_with($url, '/')) {
+    if (str_starts_with($url, '/')) {
         return $ambiente . $url; // Retorna a URL completa concatenando o ambiente e a URL fornecida, caso a URL comece com "/"
     }
 
     return $ambiente . '/' . $url; // Retorna a URL completa concatenando o ambiente e a URL fornecida, caso a URL não comece com "/"
 }
 
+/**
+ * Verifica se o servidor está rodando em localhost.
+ *
+ * @return bool Verdadeiro se estiver em localhost, falso caso contrário.
+ */
 function localhost(): bool
 {
     $servidor = filter_input(INPUT_SERVER, 'SERVER_NAME'); // Obtém o nome do servidor a partir da variável de ambiente
@@ -22,6 +54,12 @@ function localhost(): bool
     return false; // Retorna false se o nome do servidor não for "localhost"
 }
 
+/**
+ * Valida uma URL com verificações básicas.
+ *
+ * @param string $url URL a ser validada.
+ * @return bool Verdadeiro se a URL for válida, falso caso contrário.
+ */
 function validarURL(string $url): bool
 {
     if (mb_strlen($url) < 10) {
@@ -36,11 +74,23 @@ function validarURL(string $url): bool
     return false; // Retorna false se a URL for inválida
 }
 
+/**
+ * Valida uma URL usando o filtro FILTER_VALIDATE_URL do PHP.
+ *
+ * @param string $url URL a ser validada.
+ * @return bool Verdadeiro se a URL for válida, falso caso contrário.
+ */
 function validarURLComFiltro(string $url): bool
 {
     return filter_var($url, FILTER_VALIDATE_URL);
 }
 
+/**
+ * Valida um endereço de e-mail usando o filtro FILTER_VALIDATE_EMAIL do PHP.
+ *
+ * @param string $email E-mail a ser validado.
+ * @return bool Verdadeiro se o e-mail for válido, falso caso contrário.
+ */
 function validarEmail(string $email): bool
 {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
