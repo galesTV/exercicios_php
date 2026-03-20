@@ -1,6 +1,44 @@
 <?php
 
 /** 
+ * Gera um slug a partir de uma string.
+ * @param string $string String a ser transformada em slug.
+ * @return string Slug gerado.
+ */
+function slug(string $string): string
+{
+    $mapa = [
+        'À'=>'A','Á'=>'A','Â'=>'A','Ã'=>'A','Ä'=>'A','Å'=>'A',
+        'Æ'=>'AE','Ç'=>'C',
+        'È'=>'E','É'=>'E','Ê'=>'E','Ë'=>'E',
+        'Ì'=>'I','Í'=>'I','Î'=>'I','Ï'=>'I',
+        'Ñ'=>'N',
+        'Ò'=>'O','Ó'=>'O','Ô'=>'O','Õ'=>'O','Ö'=>'O','Ø'=>'O',
+        'Ù'=>'U','Ú'=>'U','Û'=>'U','Ü'=>'U',
+        'Ý'=>'Y',
+        'à'=>'a','á'=>'a','â'=>'a','ã'=>'a','ä'=>'a','å'=>'a',
+        'æ'=>'ae','ç'=>'c',
+        'è'=>'e','é'=>'e','ê'=>'e','ë'=>'e',
+        'ì'=>'i','í'=>'i','î'=>'i','ï'=>'i',
+        'ñ'=>'n',
+        'ò'=>'o','ó'=>'o','ô'=>'o','õ'=>'o','ö'=>'o','ø'=>'o',
+        'ù'=>'u','ú'=>'u','û'=>'u','ü'=>'u',
+        'ý'=>'y','ÿ'=>'y'
+    ]; // Mapa de caracteres acentuados para seus equivalentes sem acentos
+
+    $slug = strtr($string, $mapa); // Substitui os caracteres acentuados na string usando o mapa definido
+    $slug = strip_tags(trim($slug)); // Remove tags HTML e espaços em branco do início e do fim da string
+
+    $slug = preg_replace('/[^a-zA-Z0-9\s]/', '', $slug); // Remove caracteres especiais, mantendo apenas letras, números e espaços
+
+    $slug = preg_replace('/\s+/', '-', $slug); // Substitui um ou mais espaços por um hífen
+
+    $slug = trim($slug, '-'); // Remove hífens do início e do fim da string
+
+    return strtolower($slug); // Converte a string para minúsculas e retorna o slug gerado
+}
+
+/** 
 * Função para obter a data atual formatada em português.
 * @param string $data Data a ser formatada.
 * @return string Data formatada no formato "Dia da semana, dia de mês de ano
