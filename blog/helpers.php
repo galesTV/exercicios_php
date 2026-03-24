@@ -213,17 +213,23 @@ function saudacao(): string
     //     $saudacao = "Boa noite!";
     // }
 
-    // Utiliza um switch para determinar a saudação com base na hora atual
-    switch (true) {
-        case ($hora >= 0 && $hora < 12):
-            $saudacao = "Bom dia!";
-            break;
-        case ($hora >= 12 && $hora < 18):
-            $saudacao = "Boa tarde!";
-            break;
-        default:
-            $saudacao = "Boa noite!";
-    }
+    // // Utiliza um switch para determinar a saudação com base na hora atual
+    // switch (true) {
+    //     case ($hora >= 0 && $hora < 12):
+    //         $saudacao = "Bom dia!";
+    //         break;
+    //     case ($hora >= 12 && $hora < 18):
+    //         $saudacao = "Boa tarde!";
+    //         break;
+    //     default:
+    //         $saudacao = "Boa noite!";
+    // }
+
+    $saudacao = match (true) {
+        $hora >= 0 && $hora < 12 => "Bom dia!",
+        $hora >= 12 && $hora < 18 => "Boa tarde!",
+        default => "Boa noite!"
+    }; // Utiliza a expressão match para determinar a saudação com base na hora atual
 
     return $saudacao;
 }
