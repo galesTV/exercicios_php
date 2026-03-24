@@ -201,17 +201,28 @@ function formatarNumero(int $numero): string
  *
  * @return string Mensagem de saudação apropriada ao período do dia.
  */
-function saudacao()
+function saudacao(): string
 {
     $hora = date('H'); // Obtém a hora atual no formato de 24 horas
-    $saudacao = "";
 
-    if ($hora >= 0 && $hora < 12) {
-        $saudacao = "Bom dia!";
-    } else if ($hora >= 12 && $hora < 18) {
-        $saudacao = "Boa tarde!";
-    } else {
-        $saudacao = "Boa noite!";
+    // if ($hora >= 0 && $hora < 12) {
+    //     $saudacao = "Bom dia!";
+    // } else if ($hora >= 12 && $hora < 18) {
+    //     $saudacao = "Boa tarde!";
+    // } else {
+    //     $saudacao = "Boa noite!";
+    // }
+
+    // Utiliza um switch para determinar a saudação com base na hora atual
+    switch (true) {
+        case ($hora >= 0 && $hora < 12):
+            $saudacao = "Bom dia!";
+            break;
+        case ($hora >= 12 && $hora < 18):
+            $saudacao = "Boa tarde!";
+            break;
+        default:
+            $saudacao = "Boa noite!";
     }
 
     return $saudacao;
