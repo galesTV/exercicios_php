@@ -16,16 +16,8 @@ include_once 'helpers.php'; // Inclui o arquivo de funções auxiliares
 // }
 
 // $cpf = '12345678910'; // Exemplo de CPF para validação
-$cpf = '00434849138'; // Exemplo de CPF para validação
+$cpf = '472.830.300-42'; // Exemplo de CPF para validação
 
-for ($t = 9; $t < 11; $t++) {
-    for ($d = 0, $c = 0; $c < $t; $c++){
-        $d += $cpf[$c] * (($t + 1) - $c);
-    }
-    $d = ((10 * $d) % 11) % 10;
-    if ($cpf[$c] != $d) {
-        echo "CPF inválido";
-    } else {
-        echo "CPF válido";
-    }
-}
+var_dump(validarCPF($cpf)); // Chama a função de validação do CPF e exibe o resultado
+
+// echo $limparNumero = preg_replace('/[^0-9]/', '', $cpf); // Remove caracteres não numéricos do CPF

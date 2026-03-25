@@ -1,6 +1,40 @@
 <?php
 
 /** 
+ * Valida um CPF.
+ * @param string $cpf CPF a ser validado.
+ * @return bool True se o CPF for válido, false caso contrário.
+ */
+function validarCPF(string $cpf): bool
+{
+    $cpf = limparNumero($cpf); // Remove caracteres não numéricos do CPF
+
+    if(mb_strlen($cpf) != 11 or preg_match('/(\d)\1{10}/', $cpf)) {
+        return false; // Verifica se o CPF tem exatamente 11 caracteres
+    }
+    for ($t = 9; $t < 11; $t++) {
+        for ($d = 0, $c = 0; $c < $t; $c++){
+            $d += $cpf[$c] * (($t + 1) - $c);
+        }
+        $d = ((10 * $d) % 11) % 10;
+        if ($cpf[$c] != $d) {
+            return false; // Verifica se os dígitos verificadores do CPF são válidos
+        }
+    }
+    return true; // Retorna true se o CPF for válido
+}
+
+/** 
+ * Limpa uma string, removendo caracteres não numéricos.
+ * @param string $numero String a ser limpa.
+ * @return string String limpa.
+ */
+function limparNumero(string $numero): string
+{
+    return preg_replace('/[^0-9]/', '', $numero); // Remove caracteres não numéricos da string
+}
+
+/** 
  * Gera um slug a partir de uma string.
  * @param string $string String a ser transformada em slug.
  * @return string Slug gerado.
