@@ -9,11 +9,11 @@ function validarCPF(string $cpf): bool
 {
     $cpf = limparNumero($cpf); // Remove caracteres não numéricos do CPF
 
-    if(mb_strlen($cpf) != 11 or preg_match('/(\d)\1{10}/', $cpf)) {
+    if (mb_strlen($cpf) != 11 or preg_match('/(\d)\1{10}/', $cpf)) {
         return false; // Verifica se o CPF tem exatamente 11 caracteres
     }
     for ($t = 9; $t < 11; $t++) {
-        for ($d = 0, $c = 0; $c < $t; $c++){
+        for ($d = 0, $c = 0; $c < $t; $c++) {
             $d += $cpf[$c] * (($t + 1) - $c);
         }
         $d = ((10 * $d) % 11) % 10;
@@ -42,22 +42,63 @@ function limparNumero(string $numero): string
 function slug(string $string): string
 {
     $mapa = [
-        'À'=>'A','Á'=>'A','Â'=>'A','Ã'=>'A','Ä'=>'A','Å'=>'A',
-        'Æ'=>'AE','Ç'=>'C',
-        'È'=>'E','É'=>'E','Ê'=>'E','Ë'=>'E',
-        'Ì'=>'I','Í'=>'I','Î'=>'I','Ï'=>'I',
-        'Ñ'=>'N',
-        'Ò'=>'O','Ó'=>'O','Ô'=>'O','Õ'=>'O','Ö'=>'O','Ø'=>'O',
-        'Ù'=>'U','Ú'=>'U','Û'=>'U','Ü'=>'U',
-        'Ý'=>'Y',
-        'à'=>'a','á'=>'a','â'=>'a','ã'=>'a','ä'=>'a','å'=>'a',
-        'æ'=>'ae','ç'=>'c',
-        'è'=>'e','é'=>'e','ê'=>'e','ë'=>'e',
-        'ì'=>'i','í'=>'i','î'=>'i','ï'=>'i',
-        'ñ'=>'n',
-        'ò'=>'o','ó'=>'o','ô'=>'o','õ'=>'o','ö'=>'o','ø'=>'o',
-        'ù'=>'u','ú'=>'u','û'=>'u','ü'=>'u',
-        'ý'=>'y','ÿ'=>'y'
+        'À' => 'A',
+        'Á' => 'A',
+        'Â' => 'A',
+        'Ã' => 'A',
+        'Ä' => 'A',
+        'Å' => 'A',
+        'Æ' => 'AE',
+        'Ç' => 'C',
+        'È' => 'E',
+        'É' => 'E',
+        'Ê' => 'E',
+        'Ë' => 'E',
+        'Ì' => 'I',
+        'Í' => 'I',
+        'Î' => 'I',
+        'Ï' => 'I',
+        'Ñ' => 'N',
+        'Ò' => 'O',
+        'Ó' => 'O',
+        'Ô' => 'O',
+        'Õ' => 'O',
+        'Ö' => 'O',
+        'Ø' => 'O',
+        'Ù' => 'U',
+        'Ú' => 'U',
+        'Û' => 'U',
+        'Ü' => 'U',
+        'Ý' => 'Y',
+        'à' => 'a',
+        'á' => 'a',
+        'â' => 'a',
+        'ã' => 'a',
+        'ä' => 'a',
+        'å' => 'a',
+        'æ' => 'ae',
+        'ç' => 'c',
+        'è' => 'e',
+        'é' => 'e',
+        'ê' => 'e',
+        'ë' => 'e',
+        'ì' => 'i',
+        'í' => 'i',
+        'î' => 'i',
+        'ï' => 'i',
+        'ñ' => 'n',
+        'ò' => 'o',
+        'ó' => 'o',
+        'ô' => 'o',
+        'õ' => 'o',
+        'ö' => 'o',
+        'ø' => 'o',
+        'ù' => 'u',
+        'ú' => 'u',
+        'û' => 'u',
+        'ü' => 'u',
+        'ý' => 'y',
+        'ÿ' => 'y'
     ]; // Mapa de caracteres acentuados para seus equivalentes sem acentos
 
     $slug = strtr($string, $mapa); // Substitui os caracteres acentuados na string usando o mapa definido
@@ -73,10 +114,10 @@ function slug(string $string): string
 }
 
 /** 
-* Função para obter a data atual formatada em português.
-* @param string $data Data a ser formatada.
-* @return string Data formatada no formato "Dia da semana, dia de mês de ano
-*/
+ * Função para obter a data atual formatada em português.
+ * @param string $data Data a ser formatada.
+ * @return string Data formatada no formato "Dia da semana, dia de mês de ano
+ */
 function dataAtual(): string
 {
     $diaMes = date('d'); // Obtém o dia do mês atual
