@@ -1,3 +1,5 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <?php
 //Arquivo index.php responsável pela inicialização do sistema
 
@@ -6,6 +8,8 @@ include_once 'helpers.php'; // Inclui o arquivo de funções auxiliares
 include_once 'sistema/nucleo/mensagem.php'; // Inclui o arquivo da classe de mensagens
 
 $msg = new Mensagem(); // Cria uma instância da classe de mensagens
-echo $msg->renderizar(); // Chama o método renderizar para exibir a mensagem
+echo $msg->sucesso('Mensagem de sucesso!')->renderizar(); // Chama o método sucesso para exibir a mensagem
+echo $msg->alerta('Mensagem de alerta!')->renderizar(); // Chama o método alerta para exibir a mensagem
+echo $msg->erro('Mensagem de erro!')->renderizar(); // Chama o método erro para exibir a mensagem
 echo '<hr>';
 echo var_dump($msg); // Exibe a estrutura da variável $msg para depuração
